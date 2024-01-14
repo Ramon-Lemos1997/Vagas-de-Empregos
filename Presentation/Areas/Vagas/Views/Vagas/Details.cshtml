@@ -1,0 +1,53 @@
+﻿@using Domain.Entites.Vagas
+@model Vaga
+
+<div class="pt-5"></div>
+<div class="pt-5"></div>
+
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-light text-success border-success rounded mt-5" role="alert">
+        @TempData["MessageSuccess"]
+    </div>
+}
+@if (TempData["MessageError"] != null)
+{
+    <div class="alert alert-light text-danger border border-danger rounded mt-5" role="alert">
+        @TempData["MessageError"]
+    </div>
+}
+
+
+@if (Model != null && Model.Id != 0)
+{
+    <div class="text-left mt-5">
+        <div class="text-center">
+            <p class="display-6 mb-5">@Model.Title</p>
+        </div>
+        <div class="text-left">
+            <p><strong>Empresa:</strong> @Model.Company</p>
+            <p><strong>Descrição:</strong> @Model.Description</p>
+            <p><strong>Remuneração:</strong> @Model.Remuneration</p>
+            <p><strong>Regime:</strong> @Model.Regime</p>
+            <p><strong>Benefícios:</strong> @Model.Benefits</p>
+
+            <form asp-area="Vagas" asp-controller="Vagas" asp-action="UploadCurriculum" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="userEmail" value="@Model.User.Email">
+                <input type="hidden" name="title" value="@Model.Title">
+                <input type="hidden" name="vagaId" value="@Model.Id">
+                <div class="mb-3">
+                    <label for="curriculum" class="form-label text-black">Enviar Currículo (PDF ou DOC):</label>
+                    <input type="file" class="form-control w-50" id="curriculoInput" name="curriculum" accept=".pdf, .doc, .docx">
+                </div>
+                <a asp-area="Vagas" asp-controller="Vagas" asp-action="Index" class="btn btn-primary m-2">Voltar</a>
+                <button type="submit" class="btn btn-success m-2">Enviar Currículo</button>
+            </form>
+        </div>
+    </div>
+
+}
+else
+{
+    <p class="text-center mt-5">Vaga não encontrada.</p>
+}

@@ -1,0 +1,61 @@
+﻿@using Domain.Models.Vagas
+@model CreateVagaModel
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-light text-success border-success rounded mt-5" role="alert">
+        @TempData["MessageSuccess"]
+    </div>
+}
+<div>
+    <form class="p-2 mx-auto" asp-area="Vagas" asp-action="CreateVaga" asp-controller="Vagas" method="post" enctype="multipart/form-data">
+        <div asp-validation-summary="ModelOnly" class="alert alert-light text-danger border border-danger rounded mt-2" role="alert"></div>
+        
+        <h1 class="text-center pt-5">Cadastrar um nova vaga</h1>
+
+        <div class="container border rounded">
+            <div class="row mt-3">
+                <div class="col">
+                    <label asp-for="Title" class="form-label"></label>
+                    <input asp-for="Title" class="form-control" placeholder="Insira o título da vaga" required />
+                    <span class="text-danger" asp-validation-for="Title"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Company" class="form-label"></label>
+                    <input asp-for="Company" class="form-control" placeholder="Insira o nome da empresa" required />
+                    <span class="text-danger" asp-validation-for="Company"></span>
+                </div>
+            </div>
+               
+            <div class="form-group mt-2">
+                <label asp-for="Description" class="form-label"></label>
+                <textarea asp-for="Description" class="form-control" placeholder="Descreva os pontos relevantes da vaga " rows="4" required></textarea>
+                <span class="text-danger" asp-validation-for="Description"></span>
+            </div>
+
+            <div class="row mt-3">
+                <div class="col">
+                    <label asp-for="Regime" class="form-label"></label>
+                    <input asp-for="Regime" class="form-control" placeholder="Insira o tipo de regime de contratação" required />
+                    <span class="text-danger" asp-validation-for="Regime"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Remuneration" class="form-label"></label>
+                    <input type="text" pattern="\d+(,\d{1,2})?" asp-for="Remuneration" class="form-control" placeholder="Insira o a remuneração para vaga (formato aceito, 00,00)" required />
+                    <span class="text-danger" asp-validation-for="Remuneration"></span>
+                </div>
+            </div>
+
+            <div class="form-group mt-2">
+                <label asp-for="Benefits" class="form-label"></label>
+                <textarea asp-for="Benefits" class="form-control" placeholder="Descreva os benefícios associado a esta vaga " rows="4" required></textarea>
+                <span class="text-danger" asp-validation-for="Benefits"></span>
+            </div>
+
+                
+            <a asp-area="Vagas" asp-controller="Vagas" asp-action="Index" class="btn btn-primary mt-3 m-2">Voltar</a>
+            <button type="submit" class="btn btn-success mt-3 m-2">Cadastrar</button>
+            
+        </div>
+    </form>
+</div>

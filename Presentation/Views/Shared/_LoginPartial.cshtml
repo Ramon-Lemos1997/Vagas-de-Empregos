@@ -1,0 +1,48 @@
+﻿@using Domain.Entites.User
+@using Domain.Entities;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    @if (User.IsInRole("Admin"))
+    {
+        <a class="nav-link text-warning custom-link mx-2 " asp-area="Admin" asp-controller="Admin" asp-action="Index"><i class="bi bi-star-fill mx-2"></i>Área do administrador</a>
+    }
+
+    var user = await UserManager.GetUserAsync(User);
+    <div class="btn-group">
+        <button type="button" class="dropdown btn btn-success dropdown-toggle " href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-check mx-1"></i>
+            @if (string.IsNullOrWhiteSpace(user.CompanyName))
+            {
+                @user.Email
+            }
+            @user.CompanyName
+        </button>
+
+        <ul class="dropdown-menu dropdown-menu-end">
+            <li>
+                <form asp-area="Identity" asp-controller="Account" asp-action="MyAccount" method="get">
+                    <button type="submit" class="dropdown-item ">
+                        Conta
+                    </button>
+                </form>
+            </li>
+            <li>
+                <form asp-area="Identity" asp-controller="Account" asp-action="Logout" method="post">
+                    <button type="submit" class="dropdown-item ">
+                        Logout
+                    </button>
+                </form>
+            </li>
+        </ul>
+    </div>
+}
+else
+{
+    <a class="nav-link text-dark" asp-area="Identity" asp-controller="Account" asp-action="Register">Registrar-se</a>
+    <a class="nav-link text-dark " asp-area="Identity" asp-controller="Account" asp-action="Login">Conectar-se</a>
+}
+

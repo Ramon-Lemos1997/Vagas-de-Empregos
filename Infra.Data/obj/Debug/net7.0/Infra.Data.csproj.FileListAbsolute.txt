@@ -1,0 +1,17 @@
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Infra.Data.deps.json
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Infra.Data.runtimeconfig.json
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Infra.Data.dll
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Infra.Data.pdb
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Domain.dll
+D:\Projetos\Empregos\Infra.Data\bin\Debug\net7.0\Domain.pdb
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.csproj.AssemblyReference.cache
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.AssemblyInfoInputs.cache
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.AssemblyInfo.cs
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.csproj.CoreCompileInputs.cache
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.csproj.CopyComplete
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.dll
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\refint\Infra.Data.dll
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.pdb
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.genruntimeconfig.cache
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\ref\Infra.Data.dll

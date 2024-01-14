@@ -1,0 +1,46 @@
+﻿@using Domain.Entites.Vagas
+@using X.PagedList.Mvc.Core
+@using X.PagedList
+@using X.PagedList.Web.Common
+@model IPagedList<Vaga>
+
+<div class="mt-5"></div>
+<p class="display-4 mb-5">Vagas de emprego</p>
+<p>Cadastre sua <a class="link-underline-light" asp-area="Vagas" asp-controller="Vagas" asp-action="CreateVaga">vaga</a> aqui.</p>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var vaga in Model)
+    {
+        <div style="margin-bottom: 10px;">
+            <a class="link-underline-light text-black" asp-area="Vagas" asp-controller="Vagas" asp-action="Details" asp-route-id="@vaga.Id">
+                <p><strong>@vaga.Title</strong></p>
+            </a>
+            <p>@vaga.Company</p>
+            <p style="font-size: smaller;">
+                Postagem em: @vaga.CreatedAt.ToString("dd/MM/yyyy 'às' HH:mm")
+            </p>
+            <hr style="border-top: 1px solid #ccc; margin-top: 10px; margin-bottom: 10px;">
+        </div>
+    }
+
+    <div class="row mt-4 mt-5">
+        <div class="col d-flex justify-content-center">
+            @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), new PagedListRenderOptions
+   {
+       Display = PagedListDisplayMode.IfNeeded,
+       LiElementClasses = new string[] { "page-item" },
+       PageClasses = new string[] { "page-link" },
+       LinkToFirstPageFormat = "««",
+       LinkToPreviousPageFormat = "«",
+       LinkToNextPageFormat = "»",
+       LinkToLastPageFormat = "»»",
+       MaximumPageNumbersToDisplay = 2,
+   })
+        </div>
+    </div>
+}
+else
+{
+    <p>Nenhuma vaga encontrada.</p>
+}
