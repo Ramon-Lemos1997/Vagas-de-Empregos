@@ -1,1 +1,2 @@
 # Empregos
+Este é um projeto de um site de empregos fungindo da formalidade de muitos dados, a ideia é que seja simples e eficaz, onde no detalhes da vaga apenas anexar o currículo e o currículo ir diretamente para o email do recrutador jutamente com o título da vaga, pois um recrutador pode ter mais de uma vaga cadastrada, neste projeto tem que configurar o send grid e a a string de conexão no appsettinhs que está sendo ignorada aqui pois contém minhas chaves privadas, no restante está tudo configurado.
