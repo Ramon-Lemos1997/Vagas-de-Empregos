@@ -2,7 +2,7 @@
 
 namespace Domain.Models.Infra
 {
-    public class SendEmailModel
+    public class SendCurriculumModel
     {
         public string ToEmail { get; set; }
         public string Subject { get; set; }

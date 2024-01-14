@@ -30,8 +30,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Account/MyAccount.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxNeUFjY291bnQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Account/ResetPassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Account/SendCode.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxTZW5kQ29kZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Account/UpdatePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcVmlld3NcQWNjb3VudFxVcGRhdGVQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projetos/Empregos/Presentation/Areas/Identity/Views/Shared/_LoginPartial.cshtml]
@@ -54,12 +70,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcQ3JlYXRlVmFnYS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/Vagas/DeleteVaga.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcRGVsZXRlVmFnYS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/Vagas/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/Vagas/EditVaga.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcRWRpdFZhZ2EuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/Vagas/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/Vagas/UserVagas.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcVmFnYXNcVmlld3NcVmFnYXNcVXNlclZhZ2FzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [D:/Projetos/Empregos/Presentation/Areas/Vagas/Views/_ViewImports.cshtml]

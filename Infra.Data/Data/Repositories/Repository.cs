@@ -50,7 +50,6 @@ namespace Infra.Data.Data.Repositories
         public async Task Delete(T entity, CancellationToken cancellationToken = default)
             => _context.Set<T>().Remove(entity);
 
-
         /// <summary>
         /// Obtém uma entidade por ID.
         /// </summary>

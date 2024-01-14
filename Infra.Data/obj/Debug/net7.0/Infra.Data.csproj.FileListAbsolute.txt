@@ -9,6 +9,7 @@ D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.GeneratedMSBuildEdit
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.AssemblyInfoInputs.cache
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.AssemblyInfo.cs
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.csproj.CoreCompileInputs.cache
+D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.sourcelink.json
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.csproj.CopyComplete
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\Infra.Data.dll
 D:\Projetos\Empregos\Infra.Data\obj\Debug\net7.0\refint\Infra.Data.dll

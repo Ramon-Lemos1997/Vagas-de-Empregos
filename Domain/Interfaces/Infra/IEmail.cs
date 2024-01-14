@@ -4,6 +4,7 @@ namespace Domain.Interfaces.Infra
 {
     public interface IEmail
     {
-        Task<bool> SendCurriculumAsync(SendEmailModel model);
+        Task<bool> SendCurriculum(SendCurriculumModel model);
+        Task<bool> SendCode(SendCodeModel model);
     }
 }

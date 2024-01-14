@@ -1,0 +1,84 @@
+﻿@using Domain.Entites.Vagas
+@model IEnumerable<Vaga>
+
+@if (Model != null && Model.Any())
+{
+    <div class="container mt-5">
+        @if (TempData["MessageSuccess"] != null)
+        {
+            <div class="alert alert-light text-success border-success rounded mt-5" role="alert">
+                @TempData["MessageSuccess"]
+            </div>
+        }
+        @if (TempData["MessageError"] != null)
+        {
+            <div class="alert alert-light text-danger border border-danger rounded mt-5" role="alert">
+                @TempData["MessageError"]
+            </div>
+        }
+        <h1 class="text-center pb-5">Minhas vagas</h1>
+        <div class="table-responsive">
+            <table class="MyDataTables table table-white table-hover mt-5">
+                <thead>
+                    <tr>
+                        <th scope="col">Título</th>
+                        <th scope="col">Empresa</th>
+                        <th scope="col">Regime</th>
+                        <th scope="col">Data de postagem</th>
+                        <th scope="col">Data de atualização</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var v in Model)
+                    {
+                        <tr>                        
+                            <td>@v.Title</td>
+                            <td>@v.Company</td>
+                            <td>@v.Regime</td>
+                            <td>@v.CreatedAt</td>
+                            <td>@v.UpdatedAt</td>
+                            <td>
+                                <form asp-area="Vagas" asp-controller="Vagas" asp-action="Details" method="get">
+                                    <input type="hidden" name="id" value="@v.Id" />
+                                    <button type="submit" class="btn btn-sm  btn-info m-2">Detalhes</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-area="Vagas" asp-controller="Vagas" asp-action="EditVaga" method="get">
+                                    <input type="hidden" name="id" value="@v.Id" />
+                                    <button type="submit" class="btn btn-sm btn-warning m-2">Editar vaga</button>
+                                </form>
+                            </td>
+                            <td>
+                                <form asp-area="Vagas" asp-controller="Vagas" asp-action="DeleteVaga" method="get">
+                                    <input type="hidden" name="id" value="@v.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger m-2">Excluir vaga</button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <a asp-area="Identity" asp-controller="Account" asp-action="MyAccount" class="btn btn-primary mt-3 mx-2 ">Voltar</a>
+        <a class="btn  btn-success mt-3 mx-2" asp-area="Vagas" asp-controller="Vagas" asp-action="CreateVaga"> Cadastrar nova vaga</a>
+    </div>
+
+}
+else
+{
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="pt-5"></div>
+    <div class="d-flex align-items-center justify-content-center flex-column">
+        <p class="display-6">Cadastre sua <a class="link-underline-light display-6" asp-area="Vagas" asp-controller="Vagas" asp-action="CreateVaga">vaga</a> aqui.</p>
+    </div>
+
+
+}
+
+
+

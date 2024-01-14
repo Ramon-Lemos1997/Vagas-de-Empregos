@@ -8,7 +8,7 @@ namespace Domain.Entites.Vagas
         public string Title { get; set; }
         public string Company { get; set; }
         public string Description { get; set; }
-        public int Remuneration { get; set; }
+        public decimal Remuneration { get; set; }
         public string Regime { get; set; }
         public string Benefits { get; set; }
         // Propriedades de navegação

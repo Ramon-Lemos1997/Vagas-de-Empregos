@@ -46,6 +46,33 @@ namespace Presentation.Areas.Identity.Controllers
         [HttpGet]
         public async Task<IActionResult> AccessDenied() => View();
 
+        [HttpGet]
+        public IActionResult SendCode() => View();
+
+        [HttpGet]
+        public async Task<IActionResult> ResetPassword(string token, string userId)
+        {
+            var result = await _accountService.CheckIfTokenResetPasswordIsUsed(userId);
+            if (!result.Success)
+            {
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View("Error");
+            }
+
+            ViewBag.Token = token;
+            ViewBag.UserId = userId;
+
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult MyAccount() => View();
+
+        [Authorize]
+        [HttpGet]
+        public IActionResult UpdatePassword() => View();
+
         //--------------------------------------------------------------------------------------------------------------------------------
 
         [HttpPost]
@@ -53,7 +80,7 @@ namespace Presentation.Areas.Identity.Controllers
         {
             if (ModelState.IsValid)
             {
-                var (result, user) = await _accountService.CreateUserAsync(model.Email, model.Password);
+                var (result, user) = await _accountService.CreateUser(model.Email, model.Password);
 
                 if (result.Success)
                 {
@@ -97,8 +124,67 @@ namespace Presentation.Areas.Identity.Controllers
             return RedirectToAction("Index", "Home", new { area = "" });
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SendCode(EmailModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountService.SendCode(model.Email);
 
+                if (result.Success)
+                {
+                    ViewBag.ShowSuccessMessage = true;
+                    return View();
+                }
 
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View();
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountService.ResetPassword(model.UserId, model.Token, model.NewPassword);
+                if (result.Success)
+                {
+                    ViewBag.SuccessMessage = true;
+                    return View();
+                }
+
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View(model);
+            }
+            ViewBag.UserId = model.UserId;
+            ViewBag.Token = model.Token;
+            return View(model);
+        }
+
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdatePassword(UpdatePasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _accountService.UpdatePassword(model.NewPassword, model.CurrPassword, User);
+                if (result.Success)
+                {
+                    TempData["MessageSuccess"] = "Senha atualizada com sucesso.";
+                    return RedirectToAction(nameof(MyAccount));
+                }
+
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View();
+            }
+
+            return View(model);
+        }
 
         //-------------------------------------------------------------------------------------------------------
     }

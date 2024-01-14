@@ -1,0 +1,71 @@
+﻿@using Domain.Models.Vagas
+@model VagaModel
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-light text-success border-success rounded mt-5" role="alert">
+        @TempData["MessageSuccess"]
+    </div>
+}
+
+@if (Model != null)
+{
+    <div>
+        <form class="p-2 mx-auto" asp-area="Vagas" asp-action="EditVaga" asp-controller="Vagas" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="alert alert-light text-danger border border-danger rounded mt-2" role="alert"></div>
+
+            <h1 class="text-center pt-5">Editar vaga</h1>
+
+            <div class="container border rounded">
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="UserId" />
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" placeholder="Insira o título da vaga" required value="@Model.Title" />
+                        <span class="text-danger" asp-validation-for="Title"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Company" class="form-label"></label>
+                        <input asp-for="Company" class="form-control" placeholder="Insira o nome da empresa" required value="@Model.Company" />
+                        <span class="text-danger" asp-validation-for="Company"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" placeholder="Descreva os pontos relevantes da vaga" rows="4" required>@Model.Description</textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col">
+                        <label asp-for="Regime" class="form-label"></label>
+                        <input asp-for="Regime" class="form-control" placeholder="Insira o tipo de regime de contratação" required value="@Model.Regime" />
+                        <span class="text-danger" asp-validation-for="Regime"></span>
+                    </div>
+                    <div class="col">
+                        <label asp-for="Remuneration" class="form-label"></label>
+                        <input type="text" pattern="\d+(,\d{1,2})?" asp-for="Remuneration" class="form-control" placeholder="Insira a remuneração para a vaga (formato aceito, 00,00)" required value="@Model.Remuneration" />
+                        <span class="text-danger" asp-validation-for="Remuneration"></span>
+                    </div>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label asp-for="Benefits" class="form-label"></label>
+                    <textarea asp-for="Benefits" class="form-control" placeholder="Descreva os benefícios associados a esta vaga" rows="4" required>@Model.Benefits</textarea>
+                    <span class="text-danger" asp-validation-for="Benefits"></span>
+                </div>
+
+                <a asp-area="Vagas" asp-controller="Vagas" asp-action="UserVagas" class="btn btn-primary mt-3 m-2">Voltar</a>
+                <button type="submit" class="btn btn-success mt-3 m-2">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div asp-validation-summary="ModelOnly" class="alert alert-light text-danger border border-danger rounded mt-2" role="alert"></div>
+    <p class="display-6">Erro</p>
+}

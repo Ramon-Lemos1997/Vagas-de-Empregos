@@ -1,11 +1,3 @@
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.csproj.AssemblyReference.cache
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.GeneratedMSBuildEditorConfig.editorconfig
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfoInputs.cache
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfo.cs
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.csproj.CoreCompileInputs.cache
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.MvcApplicationPartsAssemblyInfo.cache
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.RazorAssemblyInfo.cache
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.RazorAssemblyInfo.cs
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\appsettings.Development.json
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\appsettings.json
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Presentation.staticwebassets.runtime.json
@@ -16,7 +8,9 @@ D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Presentation.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Presentation.pdb
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Azure.Core.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Azure.Identity.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Castle.Core.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Humanizer.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\JetBrains.Annotations.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
@@ -40,6 +34,7 @@ D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.DotNet.Scaffolding.
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Abstractions.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Proxies.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.SqlServer.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
@@ -75,6 +70,8 @@ D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\NuGet.Packaging.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\NuGet.ProjectModel.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\NuGet.Protocol.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\NuGet.Versioning.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\SendGrid.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\StarkbankEcdsa.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.CodeDom.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Composition.AttributedModel.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Composition.Convention.dll
@@ -90,6 +87,8 @@ D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Runtime.Caching.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Security.Permissions.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\System.Windows.Extensions.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\X.PagedList.dll
+D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\af\Humanizer.resources.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\ar\Humanizer.resources.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\az\Humanizer.resources.dll
@@ -247,6 +246,16 @@ D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Infra.Data.dll
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Application.pdb
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Domain.pdb
 D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Infra.Data.pdb
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.csproj.AssemblyReference.cache
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfoInputs.cache
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.AssemblyInfo.cs
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.csproj.CoreCompileInputs.cache
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.MvcApplicationPartsAssemblyInfo.cs
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.MvcApplicationPartsAssemblyInfo.cache
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.RazorAssemblyInfo.cache
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.RazorAssemblyInfo.cs
+D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.sourcelink.json
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\staticwebassets.build.json
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\staticwebassets.development.json
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\staticwebassets\msbuild.Presentation.Microsoft.AspNetCore.StaticWebAssets.props
@@ -265,11 +274,3 @@ D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\refint\Presentation.dll
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.pdb
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.genruntimeconfig.cache
 D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\ref\Presentation.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Castle.Core.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Proxies.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\JetBrains.Annotations.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\X.PagedList.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\X.PagedList.Mvc.Core.dll
-D:\Projetos\Empregos\Presentation\obj\Debug\net7.0\Presentation.MvcApplicationPartsAssemblyInfo.cs
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\SendGrid.dll
-D:\Projetos\Empregos\Presentation\bin\Debug\net7.0\StarkbankEcdsa.dll

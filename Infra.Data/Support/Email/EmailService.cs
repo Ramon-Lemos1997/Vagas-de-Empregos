@@ -28,7 +28,7 @@ namespace Infra.Data.Support.Email
         /// O método utiliza a API SendGrid para enviar um e-mail com anexo (PDF, DOC ou DOCX).
         /// </remarks>
         /// <exception cref="Exception">Exceção lançada em caso de falha durante o processo de envio do e-mail.</exception>
-        public async Task<bool> SendCurriculumAsync(SendEmailModel model)
+        public async Task<bool> SendCurriculum(SendCurriculumModel model)
         {
             try
             {
@@ -74,5 +74,31 @@ namespace Infra.Data.Support.Email
                 return false;
             }
         }
+
+        /// <summary>
+        /// Envia um e-mail usando a API SendGrid.
+        /// </summary>
+        /// <param name="model">O modelo de e-mail a ser enviado.</param>
+        /// <returns>Verdadeiro se o e-mail for enviado com sucesso, caso contrário, falso.</returns>
+        public async Task<bool> SendCode(SendCodeModel model)
+        {
+            try
+            {
+                var apiKey = _configuration["SendGridSettings:Key"];
+                var client = new SendGridClient(apiKey);
+                var from = new EmailAddress("lemosramonteste1997@gmail.com", "Ramon Lemos");
+                var to = new EmailAddress(model.ToEmail);
+                var msg = MailHelper.CreateSingleEmail(from, to, model.Subject, plainTextContent: null, htmlContent: model.Message);
+
+                var response = await client.SendEmailAsync(msg);
+                return response.StatusCode == System.Net.HttpStatusCode.Accepted;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        //-----------------------------------------------------------------------------------------------------------
     }
 }

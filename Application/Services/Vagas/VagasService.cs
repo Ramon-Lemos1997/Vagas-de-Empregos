@@ -46,11 +46,11 @@ namespace Application.Services.Vagas
         /// <exception cref="Exception">
         /// Lançada em caso de falha durante o processo de criação da vaga.
         /// </exception>
-        public async Task<ResultModel> Create(ClaimsPrincipal user, CreateVagaModel model, CancellationToken cancellationToken)
+        public async Task<ResultModel> Create(ClaimsPrincipal user, VagaModel request, CancellationToken cancellationToken)
         {
             try
             {
-                if (model == null)
+                if (request == null)
                 {
                     return new ResultModel(false, "Nenhum dado recebido.");
                 }
@@ -58,13 +58,14 @@ namespace Application.Services.Vagas
                 var User = _userManager.GetUserId(user);
                 var vaga = new Vaga
                 {
-                    Title = model.Title,
-                    Company = model.Company,
-                    Description = model.Description,
-                    Remuneration = model.Remuneration,
-                    Regime = model.Regime,
-                    Benefits = model.Benefits,
-                    UserId = User
+                    Title = request.Title,
+                    Company = request.Company,
+                    Description = request.Description,
+                    Remuneration = request.Remuneration,
+                    Regime = request.Regime,
+                    Benefits = request.Benefits,
+                    UserId = User,
+                    CreatedAt = DateTime.Now
                 };
 
                 await _unitOfWork.VagaRepository.Add(vaga, cancellationToken);
@@ -99,7 +100,7 @@ namespace Application.Services.Vagas
         /// <exception cref="Exception">
         /// Lançada em caso de falha durante o processo de recuperação da vaga.
         /// </exception>
-        public async Task<(ResultModel, Vaga)> GetById(int id, CancellationToken cancellationToken = default)
+        public async Task<(ResultModel, Vaga)> GetById(int id, CancellationToken cancellationToken)
         {
             try
             {
@@ -117,7 +118,7 @@ namespace Application.Services.Vagas
         }
 
         /// <summary>
-        /// Lista todas as vagas de emprego disponíveis, com suporte para paginação.
+        /// Lista todas as vagas de emprego disponíveis em ordem da atual para mais antiga, com suporte para paginação.
         /// </summary>
         /// <param name="page">O número da página a ser exibida.</param>
         /// <param name="cancellationToken">Um token para cancelar operações assíncronas.</param>
@@ -140,6 +141,7 @@ namespace Application.Services.Vagas
                     return (HandleError("A lista de vagas está vazia."), Array.Empty<Vaga>());
                 }
 
+                list = list.OrderByDescending(v => v.CreatedAt).ToList();
                 var pageList = await _pagination.PaginationDataAsync(list, page);
                 return (HandleSuccess("Operação bem sucedida."), pageList);
             }
@@ -165,7 +167,7 @@ namespace Application.Services.Vagas
         /// <exception cref="Exception">
         /// Lançada em caso de falha durante o processo de envio do currículo.
         /// </exception>
-        public async Task<ResultModel> SendCurriculum(IFormFile curriculum, string userEmail, string title, CancellationToken cancellationToken = default)
+        public async Task<ResultModel> SendCurriculum(IFormFile curriculum, string userEmail, string title, CancellationToken cancellationToken)
         {
             try
             {
@@ -174,7 +176,7 @@ namespace Application.Services.Vagas
                     var fileExtension = Path.GetExtension(curriculum.FileName).ToLower();
                     if (fileExtension == ".pdf" || fileExtension == ".doc" || fileExtension == ".docx")
                     {
-                        var model = new SendEmailModel
+                        var model = new SendCurriculumModel
                         {
                             ToEmail = userEmail,
                             Subject = title,
@@ -182,7 +184,7 @@ namespace Application.Services.Vagas
                             Curriculum = curriculum
                         };
 
-                        var emailSent = await _email.SendCurriculumAsync(model);
+                        var emailSent = await _email.SendCurriculum(model);
                         if (emailSent)
                         {
                             return HandleSuccess("Currículo enviado com sucesso");
@@ -202,9 +204,154 @@ namespace Application.Services.Vagas
             }
         }
 
-    
+        /// <summary>
+        /// Recupera todas as vagas associadas a um determinado usuário com base no seu identificador.
+        /// </summary>
+        /// <param name="user">O objeto ClaimsPrincipal representando o usuário.</param>
+        /// <param name="cancellationToken">Um token para cancelar operações assíncronas.</param>
+        /// <returns>
+        /// Uma tupla contendo um objeto <see cref="ResultModel"/> indicando o resultado da operação
+        /// e uma coleção de vagas (<see cref="ICollection{Vaga}"/>) associadas ao usuário.
+        /// </returns>
+        public async Task<(ResultModel, ICollection<Vaga>)> RetrieveVagasByUserID(ClaimsPrincipal user, CancellationToken cancellationToken)
+        {
+            var userId = _userManager.GetUserId(user);
+            if (userId == null)
+            {
+                return (HandleError("Usuário não encontrado."), Array.Empty<Vaga>());
+            }
 
+            var list = await _unitOfWork.VagaRepository.GetVagasByUserId(userId, cancellationToken);
+            if (list == null || !list.Any())
+            {
+                return (HandleError("Não vagas para listar."), Array.Empty<Vaga>());
+            }
 
+            return (HandleSuccess("Operação bem sucedida."), list);
+        }
+
+        /// <summary>
+        /// Obtém os detalhes de uma vaga de emprego para edição com base no seu identificador.
+        /// </summary>
+        /// <param name="id">O identificador da vaga de emprego a ser obtida.</param>
+        /// <param name="cancellationToken">Um token para cancelar operações assíncronas.</param>
+        /// <returns>
+        /// Uma tupla contendo um objeto <see cref="ResultModel"/> indicando o resultado da operação
+        /// e um modelo de vaga de emprego (<see cref="VagaModel"/>).
+        /// </returns>
+        public async Task<(ResultModel, VagaModel)> GetVagaForEditAndDeleteById(int id, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var vaga = await _unitOfWork.VagaRepository.GetById(id, cancellationToken);
+                if (vaga == null || vaga.Id == 0)
+                {
+                    return (HandleError("Não foi possível encontrar a vaga solicitada."), new VagaModel());
+                }
+
+                var vagaModel = ConvertVaga(vaga);
+                return (HandleSuccess("Vaga encontrada com sucesso"), vagaModel);
+            }
+            catch (Exception ex)
+            {
+                return (HandleError($"Erro durante a operação: {ex.Message}"), new VagaModel());
+            }
+        }
+
+        /// <summary>
+        /// Edita uma vaga de emprego com base nas informações fornecidas no modelo de vaga.
+        /// </summary>
+        /// <param name="request">O modelo de vaga contendo as informações atualizadas.</param>
+        /// <param name="cancellationToken">Um token para cancelar operações assíncronas (opcional).</param>
+        /// <returns>
+        /// Um objeto <see cref="ResultModel"/> indicando o resultado da operação.
+        /// </returns>
+        /// <remarks>
+        /// Este método verifica se o modelo fornecido é nulo antes de tentar editar a vaga.
+        /// </remarks>
+        public async Task<ResultModel> Edit(VagaModel request, CancellationToken cancellationToken )
+        {
+            try
+            {
+                if (request == null)
+                {
+                    return HandleError("Nenhum dado recebido.");
+                }
+
+                int vagaId = request.Id ?? 0;
+               
+                var entity = await _unitOfWork.VagaRepository.GetById(vagaId, cancellationToken);             
+                if (entity.Id < 0 )
+                {
+                    return HandleError("Vaga não encontrada.");
+                }
+
+                entity.Title = request.Title;
+                entity.Company = request.Company;
+                entity.Description = request.Description;
+                entity.Regime = request.Regime;
+                entity.Remuneration = request.Remuneration;
+                entity.Benefits = request.Benefits;
+                entity.UpdatedAt = DateTime.Now;
+
+                await _unitOfWork.VagaRepository.Update(entity, cancellationToken);
+
+                int saveTask = await _unitOfWork.SaveChanges();
+                if (saveTask == 0)
+                {
+                    return HandleError("Interno, Erro ao processar a requisição.");
+                }
+
+                return HandleSuccess("Operação bem sucedida.");
+            }
+            catch (Exception ex)
+            {
+                return HandleError($"Erro durante a edição da vaga: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// Exclui uma vaga com base no seu identificador.
+        /// </summary>
+        /// <param name="vagaId">O identificador único da vaga a ser excluída.</param>
+        /// <param name="cancellationToken">Um token para cancelar operações assíncronas.</param>
+        /// <returns>
+        /// Um objeto <see cref="ResultModel"/> representando o resultado da operação de exclusão.
+        /// </returns>
+        /// <remarks>
+        /// Este método exclui uma vaga com base no identificador fornecido. Retorna um objeto
+        /// <see cref="ResultModel"/> indicando se a operação foi bem sucedida ou se houve algum erro.
+        /// </remarks>
+        public async Task<ResultModel> Delete(int vagaId, CancellationToken cancellationToken)
+        {
+            try
+            {
+                if (vagaId == 0 || vagaId == null)
+                {
+                    return HandleError("Nenhum dado recebido.");
+                }
+          
+                var entity = await _unitOfWork.VagaRepository.GetById(vagaId, cancellationToken);
+                if (entity.Id < 0)
+                {
+                    return HandleError("Vaga não encontrada.");
+                }
+
+                await _unitOfWork.VagaRepository.Delete(entity, cancellationToken);
+
+                int saveTask = await _unitOfWork.SaveChanges();
+                if (saveTask == 0)
+                {
+                    return HandleError("Interno, Erro ao processar a requisição.");
+                }
+
+                return HandleSuccess("Operação bem sucedida.");
+            }
+            catch (Exception ex)
+            {
+                return HandleSuccess($"Erro durante a exclusão do produto: {ex.Message}");
+            }
+        }
 
         //------------------------------------------------------------------------------
 
@@ -227,6 +374,28 @@ namespace Application.Services.Vagas
         private ResultModel HandleSuccess(string successMessage)
         {
             return new ResultModel(true, successMessage);
+        }
+
+        /// <summary>
+        /// Converte uma entidade <see cref="Vaga"/> para um modelo de vaga <see cref="VagaModel"/>.
+        /// </summary>
+        /// <param name="vaga">A entidade Vaga a ser convertida.</param>
+        /// <returns>
+        /// Um modelo de vaga <see cref="VagaModel"/> contendo os dados da entidade Vaga.
+        /// </returns>
+        private VagaModel ConvertVaga(Vaga vaga)
+        {
+            return new VagaModel 
+            {
+                Id = vaga.Id,
+                Title = vaga.Title,
+                Company = vaga.Company,
+                Description = vaga.Description,
+                Regime = vaga.Regime,
+                Remuneration = vaga.Remuneration,
+                Benefits = vaga.Benefits,
+                UserId = vaga.UserId
+            };
         }
 
         //------------------------------------------------------------------------------

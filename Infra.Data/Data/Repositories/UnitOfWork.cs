@@ -23,7 +23,9 @@ namespace Infra.Data.Data.Repositories
 
         //------------------------------------------------------------------------------------
 
-
+        /// <summary>
+        /// Instância de vagaRepository.
+        /// </summary>
         public IVaga VagaRepository => _vagas;
 
         /// <summary>
@@ -45,8 +47,6 @@ namespace Infra.Data.Data.Repositories
                 throw; 
             }
         }
-
-
 
         /// <summary>
         /// Inicia uma nova transação se não houver uma transação ativa.

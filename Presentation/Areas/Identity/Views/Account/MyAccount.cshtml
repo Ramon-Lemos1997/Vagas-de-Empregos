@@ -1,0 +1,19 @@
+﻿<div class="pt-5"></div>
+<div class="pt-5"></div>
+<div class="pt-5"></div>
+
+@if (TempData["MessageSuccess"] != null)
+{
+    <div class="alert alert-light text-success border-success rounded mt-5" role="alert">
+        @TempData["MessageSuccess"]
+    </div>
+}
+
+<h1 class="text-center pb-5">Configurações da conta</h1>
+<div class="container">
+    <div class="container mt-5 col-6 ">
+        <a class="btn btn-primary m-2" asp-area="" asp-controller="Home" asp-action="Index">Voltar</a>
+        <a class="btn btn-warning m-2" asp-area="Identity" asp-controller="Account" asp-action="UpdatePassword">Redefnir senha</a>
+        <a class="btn btn-info m-2" asp-area="Vagas" asp-controller="Vagas" asp-action="UserVagas">Minhas vaga</a>
+    </div>
+</div>

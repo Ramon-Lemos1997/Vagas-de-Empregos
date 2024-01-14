@@ -1,5 +1,5 @@
 ﻿@using Domain.Models.Vagas
-@model CreateVagaModel
+@model VagaModel
 
 @if (TempData["MessageSuccess"] != null)
 {
@@ -53,7 +53,7 @@
             </div>
 
                 
-            <a asp-area="Vagas" asp-controller="Vagas" asp-action="Index" class="btn btn-primary mt-3 m-2">Voltar</a>
+            <a asp-area="Identity" asp-controller="Account" asp-action="MyAccount" class="btn btn-primary mt-3 m-2">Voltar</a>
             <button type="submit" class="btn btn-success mt-3 m-2">Cadastrar</button>
             
         </div>

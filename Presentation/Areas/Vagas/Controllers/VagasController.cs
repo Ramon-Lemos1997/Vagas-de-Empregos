@@ -16,6 +16,7 @@ namespace Presentation.Areas.Vagas.Controllers
         }
 
         //------------------------------------------------------------------------------------
+
         [HttpGet]
         public async Task<IActionResult> Index(int? page)
         {
@@ -29,8 +30,8 @@ namespace Presentation.Areas.Vagas.Controllers
             return View(list);
         }
 
-        [Authorize]
         [HttpGet]
+        [Authorize]
         public IActionResult CreateVaga() => View();
 
         [HttpGet]
@@ -47,12 +48,54 @@ namespace Presentation.Areas.Vagas.Controllers
             return View(vaga);
         }
 
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> UserVagas()
+        {
+            var (result, list) = await _vagas.RetrieveVagasByUserID(User);
+            if (result.Success)
+            {
+                return View(list);
+            }
+
+            ModelState.AddModelError(string.Empty, result.Message);
+            return View(list);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditVaga(int id)
+        {
+            var (result, vaga) = await _vagas.GetVagaForEditAndDeleteById(id);
+            if (result.Success)
+            {
+                return View(vaga);
+            }
+
+            ModelState.AddModelError(string.Empty, result.Message);
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> DeleteVaga(int id)
+        {
+            var (result, vaga) = await _vagas.GetVagaForEditAndDeleteById(id);
+            if (result.Success)
+            {
+                return View(vaga);
+            }
+
+            ModelState.AddModelError(string.Empty, result.Message);
+            return View();
+        }
+
         //------------------------------------------------------------------------------------
 
 
-        [Authorize]
         [HttpPost]
-        public async Task<IActionResult> CreateVaga(CreateVagaModel request)
+        [Authorize]
+        public async Task<IActionResult> CreateVaga(VagaModel request)
         {
             if (!ModelState.IsValid)
             {
@@ -84,9 +127,42 @@ namespace Presentation.Areas.Vagas.Controllers
             TempData["MessageError"] = result.Message;
             return RedirectToAction("Details", new { id = vagaId });
         }
-        
-            
-              
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditVaga(VagaModel request)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _vagas.Edit(request);
+                if (result.Success)
+                {
+                    TempData["MessageSuccess"] = "Vaga editada com sucesso.";
+                    return RedirectToAction(nameof(EditVaga), new { id = request.Id });
+                }
+
+                ModelState.AddModelError(string.Empty, result.Message);
+                return View();
+            }
+
+            return View(request);
+        }
+
+        [HttpPost, ActionName("DeleteVaga")]
+        [Authorize]
+        public async Task<IActionResult> DeleteVagaConfirmed(int vagaId)
+        {
+            var result = await _vagas.Delete(vagaId);
+            if (result.Success)
+            {
+                TempData["MessageSuccess"] = "Vaga excluída com sucesso.";
+                return RedirectToAction(nameof(UserVagas));
+            }
+
+            TempData["MessageError"] = result.Message;
+            return RedirectToAction(nameof(UserVagas));
+        }
+
 
         //------------------------------------------------------------------------------------
     }

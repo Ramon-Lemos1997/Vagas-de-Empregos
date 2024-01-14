@@ -41,6 +41,13 @@
                     <input type="file" class="form-control w-50" id="curriculoInput" name="curriculum" accept=".pdf, .doc, .docx">
                 </div>
                 <a asp-area="Vagas" asp-controller="Vagas" asp-action="Index" class="btn btn-primary m-2">Voltar</a>
+                @{
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        <a asp-area="Vagas" asp-controller="Vagas" asp-action="UserVagas" class="btn btn-primary m-2">Voltar para conta</a>
+                    }
+                }
+
                 <button type="submit" class="btn btn-success m-2">Enviar Currículo</button>
             </form>
         </div>
