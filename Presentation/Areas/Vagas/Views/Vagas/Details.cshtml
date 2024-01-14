@@ -38,7 +38,8 @@
                 <input type="hidden" name="vagaId" value="@Model.Id">
                 <div class="mb-3">
                     <label for="curriculum" class="form-label text-black">Enviar Currículo (PDF ou DOC):</label>
-                    <input type="file" class="form-control w-50" id="curriculoInput" name="curriculum" accept=".pdf, .doc, .docx">
+                    <input type="file" class="form-control w-50" id="curriculoInput" name="curriculum" accept=".pdf, .doc, .docx" onchange="validateFileSize()">
+                    <small class="text-danger" id="fileSizeError" style="display:none;">O arquivo não pode exceder 3 megabytes.</small>
                 </div>
                 <a asp-area="Vagas" asp-controller="Vagas" asp-action="Index" class="btn btn-primary m-2">Voltar</a>
                 @{
@@ -58,3 +59,23 @@ else
 {
     <p class="text-center mt-5">Vaga não encontrada.</p>
 }
+
+
+<script>
+    function validateFileSize() {
+        var input = document.getElementById('curriculoInput');
+        var maxSize = 3 * 1024 * 1024; 
+        var errorLabel = document.getElementById('fileSizeError');
+
+        if (input.files.length > 0) {
+            var fileSize = input.files[0].size;
+
+            if (fileSize > maxSize) {
+                input.value = ''; 
+                errorLabel.style.display = 'block';
+            } else {
+                errorLabel.style.display = 'none';
+            }
+        }
+    }
+</script>

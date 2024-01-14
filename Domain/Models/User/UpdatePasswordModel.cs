@@ -1,4 +1,4 @@
-﻿using Domain.Models.User.Validation;
+﻿using Domain.Models.Validation;
 using System.ComponentModel.DataAnnotations;
 
 namespace Domain.Models.User

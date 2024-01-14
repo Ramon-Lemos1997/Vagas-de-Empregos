@@ -1,8 +1,8 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models.User.Validation
-{ 
+namespace Domain.Models.Validation
+{
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class PasswordRequirements : ValidationAttribute
     {

@@ -1,3 +1,4 @@
 /Presentation/appsettings.json
 .vs/
 
+/Presentation/bin/Debug/net7.0/appsettings.json

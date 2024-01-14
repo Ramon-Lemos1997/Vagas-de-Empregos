@@ -105,7 +105,7 @@ namespace Presentation.Areas.Vagas.Controllers
             var result = await _vagas.Create(User, request);
             if (result.Success)
             {
-                TempData["MessageSuccess"] = "Produto cadastrado com sucesso.";
+                TempData["MessageSuccess"] = "Vaga cadastrada com sucesso.";
                 return RedirectToAction(nameof(CreateVaga), "Vagas", new { area = "Vagas" });
             }
 
